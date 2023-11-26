@@ -1,8 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { getProducts } from '@/helpers';
+import Container from './Container';
+import ProductsData from './ProductsData';
+import { Products } from '../../type';
 
-const Products = () => {
+const Products = async () => {
+    const products = await getProducts();
   return (
-    <div>Products</div>
+    <Container className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 -mt-10'>
+        {
+            products?.map((product: Products) => (
+                <ProductsData product={product} key={product._id}/>
+            ))
+        }
+    </Container>
   )
 }
 
