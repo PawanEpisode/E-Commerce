@@ -6,8 +6,10 @@ import "slick-carousel/slick/slick.css";
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Flippy',
-  description: 'A E-Commerce Platform',
+  title: {
+    template: "ecommerce_shop",
+    default: "Flippy - All in One Place"
+  }
 }
 
 export default function RootLayout({
