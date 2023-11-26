@@ -5,6 +5,7 @@ import { ProductProps } from "../../type";
 import { calculateOfferPercentage } from "@/helpers";
 import FormattedPrice from "./FormattedPrice";
 import { IoIosStar } from "react-icons/io";
+import Link from "next/link";
 
 const ProductsData = ({ product }: ProductProps) => {
   const starArray = Array.from({length: product?.rating}, (_,index) => (
@@ -16,22 +17,24 @@ const ProductsData = ({ product }: ProductProps) => {
   return (
     <div className="w-full rounded-lg overflow-hidden">
       <div>
-        <div className="w-full h-96 group overflow-hidden relative">
-          <Image
-            src={product?.image}
-            alt="product imaage"
-            width={500}
-            height={500}
-            className="w-full h-full object-cover 
-          group-hover:scale-110 duration-200 rounded-t-lg"
-          />
-          {product?.isNew && (
-            <span className="absolute top-2 right-2 font-medium 
-            text-xs py-1 px-3 bg-white group-hover:text-white duration-200 rounded-full group-hover:bg-red-600">
-              New Arrival
-            </span>
-          )}
-        </div>
+        <Link href={{pathname: '/product', query: {_id: product?._id}}}>
+          <div className="w-full h-96 group overflow-hidden relative">
+            <Image
+              src={product?.image}
+              alt="product imaage"
+              width={500}
+              height={500}
+              className="w-full h-full object-cover 
+            group-hover:scale-110 duration-200 rounded-t-lg"
+            />
+            {product?.isNew && (
+              <span className="absolute top-2 right-2 font-medium 
+              text-xs py-1 px-3 bg-white group-hover:text-white duration-200 rounded-full group-hover:bg-red-600">
+                New Arrival
+              </span>
+            )}
+          </div>
+        </Link>
         <div className="border-[1px] border-slate-300 
         border-t-0 px-2 py-4 flex flex-col 
         gap-y-2 bg-white rounded-b-lg">
