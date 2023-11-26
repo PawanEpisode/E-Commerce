@@ -3,7 +3,7 @@ const nextConfig = {
     images: {
         domains: [
             "images.pexels.com",
-            "im.freepik.com",
+            "img.freepik.com",
             "avatars.githubusercontent.com",
             "lh3.googleusercontnt.com",
         ]
