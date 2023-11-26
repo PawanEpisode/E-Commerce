@@ -56,7 +56,7 @@ const Banner = () => {
     },
   ];
   return (
-    <div>
+    <div className="relative">
       <Slider {...settings}>
         {/* We can create an Array containing banner image details */}
         {/* use .map method to loop over the array and use SingleBanner Component to handle these three image carousels  */}
@@ -68,6 +68,7 @@ const Banner = () => {
           <SingleBanner {...bannerdetails} />
         ))}
       </Slider>
+      <div className="absolute w-full h-44 bg-gradient-to-t from-gray-100 to-transparent bottom-0 left-0 z-10"/>
     </div>
   );
 };
