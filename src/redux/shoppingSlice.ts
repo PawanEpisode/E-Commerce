@@ -36,7 +36,9 @@ export const shoppingSlice = createSlice({
             ((item: Products) => item._id === action.payload._id);
 
             if(existingProduct?.quantity === 1) {
-                existingProduct.quantity === 1; // Need to Understand
+                state.productData = state.productData.filter(
+                    (item) => item._id !== existingProduct?._id
+                ) // Need to Understand
             } else {
                 existingProduct && existingProduct.quantity--;
             }
@@ -48,6 +50,12 @@ export const shoppingSlice = createSlice({
         },
         resetCart: (state) => {
             state.productData = [];
+        },
+        addUser: (state, action) => {
+            state.userInfo = action.payload;
+        },
+        deleteUser: (state) => {
+            state.userInfo = null;
         }
     }
 });
@@ -58,5 +66,7 @@ export const {
     decreaseQuantity,
     deleteProduct,
     resetCart,
+    addUser,
+    deleteUser,
 } = shoppingSlice.actions;
 export default shoppingSlice.reducer;
