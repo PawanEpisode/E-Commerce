@@ -12,13 +12,14 @@ import { Products, StateProps } from "../../type";
 import FormattedPrice from "./FormattedPrice";
 import Link from "next/link";
 import { addUser, deleteUser } from "@/redux/shoppingSlice";
+import { BsBookmark } from "react-icons/bs";
 // we are using nextjs hooks that is used in server side rendering,
 // so we have to MAKE this file Client side
 
 const Header = () => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
-  const { productData } = useSelector(
+  const { productData, orderData } = useSelector(
     (state: StateProps) => state.shopping);
 
   useEffect(() => {
@@ -116,6 +117,21 @@ const Header = () => {
             className="rounded-full object-cover"
           />
         )}
+
+        {/* Order Button */}
+        {
+          orderData?.order?.length && session && (
+            <Link
+            href={'/order'}
+            className="headerDiv px-2 gap-x-1 cursor-pointer"
+            >
+              <BsBookmark className="text-2xl"/>
+              <p className="text-sm font-semibold">
+                Orders
+              </p>
+            </Link>
+          ) 
+        }
 
         {/* {Logut Button} */}
         {session && (
