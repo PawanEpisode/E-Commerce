@@ -7,17 +7,33 @@ import { FiSearch, FiLogOut } from "react-icons/fi";
 import { AiOutlineUser } from "react-icons/ai";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Products, StateProps } from "../../type";
 import FormattedPrice from "./FormattedPrice";
 import Link from "next/link";
+import { addUser, deleteUser } from "@/redux/shoppingSlice";
 // we are using nextjs hooks that is used in server side rendering,
 // so we have to MAKE this file Client side
 
 const Header = () => {
+  const dispatch = useDispatch();
   const { data: session } = useSession();
   const { productData } = useSelector(
     (state: StateProps) => state.shopping);
+
+  useEffect(() => {
+    if(session) {
+      dispatch(
+        addUser({
+          name: session?.user?.name,
+          email: session?.user?.email,
+          image: session?.user?.image,
+        })
+      )
+    } else {
+      dispatch(deleteUser());
+    }
+  },[session, dispatch]);
 
   const [totalAmount, setTotalAmount] = useState(0);
 
