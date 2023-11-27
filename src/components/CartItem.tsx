@@ -40,6 +40,7 @@ const CartItem = () => {
                             width={500}
                             height={500}
                             className="w-20 h-20 object-cover"
+                            loading="lazy"
                             />
                         </div>
 
