@@ -108,15 +108,13 @@ const Header = () => {
         )}
 
         {/* Order Button */}
-        {orderData?.order?.length && session && (
-          <Link
+        <Link
             href={"/order"}
             className="headerDiv px-2 gap-x-1 cursor-pointer"
           >
             <BsBookmark className="text-2xl" />
             <p className="text-sm font-semibold">Orders</p>
           </Link>
-        )}
 
         {/* {Logut Button} */}
         {session && (
