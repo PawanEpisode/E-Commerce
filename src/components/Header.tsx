@@ -48,7 +48,7 @@ const Header = () => {
 
   useEffect(()=> {
     setTotalAmount(getTotalAmount(productData));
-  }),[productData];
+  },[productData]);
 
   return (
     <div className="bg-bodyColor h-20 top-0 sticky z-50">
