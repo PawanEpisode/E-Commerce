@@ -1,3 +1,4 @@
+import { BsYoutube, BsGithub, BsLinkedin } from "react-icons/bs";
 export const productData = [
   {
     _id: 1,
@@ -563,3 +564,56 @@ export const trendingProductData = [
     quantity: 1,
   },
 ];
+
+
+export const LatestPosts = [
+  {
+    title: "Where Music is Headed Next",
+    subtitle: "December 28, 2022",
+  },
+  {
+    title: "Where Film is Headed Next",
+    subtitle: "May 20, 2022",
+  },
+  {
+    title: "Where Gaming is Headed Next",
+    subtitle: "January 12, 2022",
+  },
+];
+export const LinksFooter = [
+  {
+    linkurl: "/",
+    linktext: "Home",
+  },
+  {
+    linkurl: "/cart",
+    linktext: "Cart",
+  },
+  {
+    linkurl: "/about",
+    linktext: "About",
+  },
+  {
+    linkurl: "/newsletter",
+    linktext: "Newsletter",
+  },
+  {
+    linkurl: "/contacts",
+    linktext: "Contacts",
+  },
+];
+
+export const SocialMediaLinks = [
+  {
+    linkurl: "https://github.com/PawanEpisode/E-Commerce",
+    LinkIcon: BsYoutube
+  },
+  {
+    linkurl: "https://www.linkedin.com/in/pawan-kumar-9a79071ab/",
+    LinkIcon: BsLinkedin
+  },
+  {
+    linkurl: "https://github.com/PawanEpisode",
+    LinkIcon: BsGithub
+  }
+]

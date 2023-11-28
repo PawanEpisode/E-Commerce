@@ -1,10 +1,9 @@
-import Container from '@/components/Container'
-import Link from 'next/link'
-import React from 'react'
+import Container from '@/components/Container';
+import CustomButton from '@/components/CustomButton';
 
 const NotFoundPage = () => {
   return (
-    <Container className='flex items-center justify-center py-20'>
+    <Container className='flexcss py-20'>
       <div className='max-w-2xl min-h-[290px] flex 
       flex-col items-center justify-center gap-y-5'>
         <h2 className='text-4xl font-bold'>Your Page not found</h2>
@@ -12,15 +11,7 @@ const NotFoundPage = () => {
           Oops! The page you are looking for does not exist.
           It might have been moved or deleted.
         </p>
-        <Link 
-        href={'/'}
-        className='bg-black text-slate-100 w-44 h-12 
-        rounded-full text-base font-semibold flex 
-        items-center justify-center hover:bg-red-600 
-        hover:text-white duration-200'
-        >
-          Back to Home
-        </Link>
+        <CustomButton href='/' btnText='Back to Home'/>
       </div>
     </Container>
   )

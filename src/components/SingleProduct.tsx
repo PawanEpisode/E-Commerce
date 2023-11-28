@@ -43,7 +43,7 @@ const SingleProduct = ({product}: any) => {
                 <button 
                 onClick={() => dispatch(addToCart(product)) &&
                     toast.success(
-                      `${product?.title.substring(0,15)} added To Cart successfully`
+                    `${product?.title.substring(0,15)} added To Cart successfully`
                     )
                     }
                 className='bg-darkText text-slate-100 
@@ -51,7 +51,9 @@ const SingleProduct = ({product}: any) => {
                 border-r-[1px] border-r-slate-500'>
                     add to cart
                 </button>
-                <span className='bg-darkText text-xl text-slate-100 w-12 flex items-center justify-center group-hover:bg-red-500 duration-200 py-3'>
+                <span className='bg-darkText text-xl 
+                text-slate-100 w-12 flexcss 
+                group-hover:bg-red-500 duration-200 py-3'>
                     <IoMdCart />
                 </span>
             </div>

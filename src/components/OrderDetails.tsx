@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Products, StateProps } from "../../type";
 import Image from "next/image";
@@ -7,25 +6,14 @@ import FormattedPrice from "./FormattedPrice";
 import { resetOrder } from "@/redux/shoppingSlice";
 import concern from "@/images/concern.jpg";
 import ordernow from "@/images/ordernow.jpg";
-import Link from "next/link";
+import useTotalAmount from "@/hooks/useTotalAmount";
+import CustomButton from "./CustomButton";
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
   const { orderData } = useSelector((state: StateProps) => state?.shopping);
 
-  const [totalAmount, setTotalAmount] = useState(0);
-
-  const getTotalAmount = (orderData: Products[] =[]) => {
-    let amount = 0;
-    for (const product of orderData) {
-      amount += product.price * product.quantity;
-    }
-    return amount;
-  };
-
-  useEffect(() => {
-    setTotalAmount(getTotalAmount(orderData?.order));
-  },[orderData?.order]);
+  const totalAmount = useTotalAmount(orderData?.order);
 
   return (
     <div>
@@ -36,9 +24,9 @@ const OrderDetails = () => {
                 font-medium py-2 border-b-[1px] border-b-gray-300"
           >
             <p className="col-span-4">Items</p>
-            <p className="flex items-center justify-center">Quantity</p>
-            <p className="flex items-center justify-center">Unit Price</p>
-            <p className="flex items-center justify-center">Amount</p>
+            <p className="flexcss">Quantity</p>
+            <p className="flexcss">Unit Price</p>
+            <p className="flexcss">Amount</p>
           </div>
           <div className="py-2 flex flex-col justify-center gap-5">
             {orderData?.order?.map((item: Products) => (
@@ -62,13 +50,13 @@ const OrderDetails = () => {
                     <p>{item?.description}</p>
                   </div>
                 </div>
-                <p className="flex items-center justify-center">
+                <p className="flexcss">
                   {item?.quantity}
                 </p>
-                <p className="flex items-center justify-center">
+                <p className="flexcss">
                   <FormattedPrice amount={item?.price} />
                 </p>
-                <p className="flex items-center justify-center">
+                <p className="flexcss">
                   <FormattedPrice amount={item?.price * item?.quantity} />
                 </p>
               </div>
@@ -96,33 +84,27 @@ const OrderDetails = () => {
           </button>
         </div>
       ) : (
-        <div className="flex p-4 flex-col gap-y-3 
+        <div
+          className="flex p-4 flex-col gap-y-3 
         items-center bg-white justify-center 
-        shadow-md rounded-md">
-            <Image 
+        shadow-md rounded-md"
+        >
+          <Image
             src={ordernow}
             alt="shop now image"
             width={600}
             height={600}
             className="object-cover"
-            />
+          />
 
-            <div className="flex items-center justify-center">
-                <h2 className="text-4xl font-bold">
-                Oops! You haven't placed any order!
-                </h2>
-                <Image src={concern} alt="emoji" className="w-20 h-20" />
-            </div>
-            <p>Nothing In Order Summary To Show</p>
-            <Link href={"/"}>
-            <button
-              className="bg-black text-slate-100 
-                    w-44 h-12 rounded-full text-base 
-                    font-semibold hover:bg-red-600 duration-200"
-            >
-              Continue Shopping
-            </button>
-          </Link>
+          <div className="flexcss">
+            <h2 className="text-4xl font-bold">
+              Oops! You haven't placed any order!
+            </h2>
+            <Image src={concern} alt="emoji" className="w-20 h-20" />
+          </div>
+          <p>Nothing In Order Summary To Show</p>
+          <CustomButton href="/" btnText="Continue Shopping"/>
         </div>
       )}
     </div>

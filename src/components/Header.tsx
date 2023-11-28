@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Container from "./Container";
 import Logo from "./Logo";
 import { IoMdCart } from "react-icons/io";
@@ -7,12 +7,13 @@ import { FiSearch, FiLogOut } from "react-icons/fi";
 import { AiOutlineUser } from "react-icons/ai";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
-import { useSelector, useDispatch } from 'react-redux';
-import { Products, StateProps } from "../../type";
+import { useSelector, useDispatch } from "react-redux";
+import { StateProps } from "../../type";
 import FormattedPrice from "./FormattedPrice";
 import Link from "next/link";
 import { addUser, deleteUser } from "@/redux/shoppingSlice";
 import { BsBookmark } from "react-icons/bs";
+import useTotalAmount from "@/hooks/useTotalAmount";
 // we are using nextjs hooks that is used in server side rendering,
 // so we have to MAKE this file Client side
 
@@ -20,35 +21,24 @@ const Header = () => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
   const { productData, orderData } = useSelector(
-    (state: StateProps) => state.shopping);
+    (state: StateProps) => state.shopping
+  );
 
   useEffect(() => {
-    if(session) {
+    if (session) {
       dispatch(
         addUser({
           name: session?.user?.name,
           email: session?.user?.email,
           image: session?.user?.image,
         })
-      )
+      );
     } else {
       dispatch(deleteUser());
     }
-  },[session, dispatch]);
+  }, [session, dispatch]);
 
-  const [totalAmount, setTotalAmount] = useState(0);
-
-  const getTotalAmount = ( productData: Products[]) => {
-    let amount =0;
-    for( const product of productData) {
-      amount += product.price*product.quantity;
-    }
-    return amount;
-  }
-
-  useEffect(()=> {
-    setTotalAmount(getTotalAmount(productData));
-  },[productData]);
+  const totalAmount = useTotalAmount(productData);
 
   return (
     <div className="bg-bodyColor h-20 top-0 sticky z-50">
@@ -85,7 +75,7 @@ const Header = () => {
         )}
 
         {/* {Cart Button} */}
-        <Link href={'/cart'}>
+        <Link href={"/cart"}>
           <div
             className="bg-black hover:bg-slate-950 rounded-full 
               text-slate-100 hover:text-white flex items-center 
@@ -94,18 +84,17 @@ const Header = () => {
           >
             <IoMdCart className="text-2xl" />
             <p className="text-sm font-semibold">
-              <FormattedPrice amount={totalAmount || 0}/>
+              <FormattedPrice amount={totalAmount || 0} />
             </p>
             <span
               className="bg-white text-red-600 rounded-full text-xs 
                   font-semibold absolute -right-2 -top-1 w-5 h-5 
-                  flex items-center justify-center shadow-xl shadow-black"
+                  flexcss shadow-xl shadow-black"
             >
               {productData ? productData?.length : 0}
             </span>
           </div>
         </Link>
-        
 
         {/* {User Image} */}
         {session && (
@@ -119,19 +108,15 @@ const Header = () => {
         )}
 
         {/* Order Button */}
-        {
-          orderData?.order?.length && session && (
-            <Link
-            href={'/order'}
+        {orderData?.order?.length && session && (
+          <Link
+            href={"/order"}
             className="headerDiv px-2 gap-x-1 cursor-pointer"
-            >
-              <BsBookmark className="text-2xl"/>
-              <p className="text-sm font-semibold">
-                Orders
-              </p>
-            </Link>
-          ) 
-        }
+          >
+            <BsBookmark className="text-2xl" />
+            <p className="text-sm font-semibold">Orders</p>
+          </Link>
+        )}
 
         {/* {Logut Button} */}
         {session && (

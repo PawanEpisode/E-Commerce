@@ -64,11 +64,11 @@ const Banner = () => {
         <SingleBanner imageSource={bannertwo} imageAlt="bannertwo" bannerTextTitle="Seasonal Offers" />
         <SingleBanner imageSource={bannerthree} imageAlt="bannerthree" bannerTextTitle="Best For Men" /> */}
 
-        {bannerArray.map((bannerdetails,index) => (
+        {bannerArray.map((bannerdetails, index) => (
           <SingleBanner key={index} {...bannerdetails} />
         ))}
       </Slider>
-      <div className="absolute w-full h-44 bg-gradient-to-t from-gray-100 to-transparent bottom-0 left-0 z-10"/>
+      <div className="absolute w-full h-44 bg-gradient-to-t from-gray-100 to-transparent bottom-0 left-0 z-10" />
     </div>
   );
 };
