@@ -4,12 +4,16 @@ import { Products } from "../../type";
 interface StoreState {
     productData: Products[];
     userInfo: null | string;
-    orderData: [];
+    orderData: {
+        order: []
+    };
 }
 const initialState: StoreState = {
     productData: [],
     userInfo: null,
-    orderData: [],
+    orderData: {
+        order: []
+    },
 };
 
 export const shoppingSlice = createSlice({
@@ -61,7 +65,10 @@ export const shoppingSlice = createSlice({
             state.orderData = action.payload
         },
         resetOrder: (state) => {
-            state.orderData = [];
+            state.orderData ={
+                ...state.orderData,
+                order: [],
+            }
         }
     }
 });
