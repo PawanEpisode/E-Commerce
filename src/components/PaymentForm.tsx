@@ -42,7 +42,7 @@ const PaymentForm = () => {
       return handleSignIn();
     }
     const stripe = await stripePromise;
-    const response = await fetch("http://localhost:3000/api/checkout", {
+    const response = await fetch("https://e-commerce-pawanepisode.vercel.app/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
