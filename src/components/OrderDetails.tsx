@@ -25,8 +25,7 @@ const OrderDetails = () => {
 
   useEffect(() => {
     setTotalAmount(getTotalAmount(orderData?.order));
-  }),
-    [orderData?.order];
+  },[orderData?.order]);
 
   return (
     <div>

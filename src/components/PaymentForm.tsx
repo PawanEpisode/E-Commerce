@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Products, StateProps } from "../../type";
 import FormattedPrice from "./FormattedPrice";
 import { loadStripe } from "@stripe/stripe-js";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { resetCart, saveOrder } from "@/redux/shoppingSlice";
 
 const PaymentForm = () => {
@@ -25,8 +25,7 @@ const PaymentForm = () => {
 
   useEffect(() => {
     setTotalAmount(getTotalAmount(productData));
-  }),
-    [productData];
+  },[productData]);
   
   // Stripe Payment Integration Started Here
   const stripePromise = loadStripe(
@@ -35,7 +34,13 @@ const PaymentForm = () => {
 
   const {data: session } = useSession();
 
+  const handleSignIn = () => signIn();
+
   const handleCheckout = async () => {
+
+    if(!userInfo) {
+      return handleSignIn();
+    }
     const stripe = await stripePromise;
     const response = await fetch("http://localhost:3000/api/checkout", {
       method: "POST",
