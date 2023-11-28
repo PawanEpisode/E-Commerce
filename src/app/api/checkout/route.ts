@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import Stripe from "stripe";
 import { Products } from "../../../../type";
 
-export const POST = async (request: NextResponse) => {
+export const POST = async (request: NextRequest) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   try {
     const reqBody = await request.json();
